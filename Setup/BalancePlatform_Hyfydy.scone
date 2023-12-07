@@ -1,0 +1,56 @@
+CmaPoolOptimizer {
+	signature_prefix = DATE_TIME
+	signature_postfix = "M080D100"
+	
+	optimizations = 60
+	active_optimizations = 6
+	concurrent_optimizations = 3
+	prediction_window  = 400
+	prediction_start = 200
+	prediction_look_ahead = 400
+	random_seed = 113
+	
+	max_generations = 1000	
+	min_progress = 1e-3
+	
+	init_file = 7500_0.559_0.195.par		# initial guess is the results from the previous magnitude (in this case 60 mm)
+	
+	use_init_file = 1
+	use_init_file_std = false #false #std from the init file might be very small, if so don't use them
+	
+	
+	SimulationObjective {
+		max_duration = 10	
+		
+		
+		# Model used in simulation
+		ModelHyfydy {
+			model_file = H0918.hfd
+			state_init_file = InitStateStand.zml
+			initial_load = 1
+			fixed_control_step_size = 0.005	
+			<< HfdConfigPlanarV2.zml >>
+		}
+		
+		CompositeController {		
+			
+			# Controller for reflex based balance (different file)
+			<< ControllerLenReflexBalance.scone >>	
+			<< ControllerComReflexBalance.scone >>
+			<< ControllerCoContractionReflexBalance.scone >>
+			
+			
+			ScriptController {
+				script_file = "ScriptControllerMovePlatformSine.lua"
+			}
+			
+		}
+		
+		# Measure for standing balance (different file)
+		CompositeMeasure {
+			<< MeasureBalance.scone >>			
+		}
+		
+	}
+	
+}

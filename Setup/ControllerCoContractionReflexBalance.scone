@@ -1,0 +1,22 @@
+# Some predefined variables we use later on
+$KF = ~0<-10.0,10>
+$DL = 0.020
+
+ReflexController {
+	name = MuscleCo
+	symmetric = 1
+	
+	# "	Evaluating cost function criteria in predicting healthy gait", Veerkamp et al.
+	# reflex loop between muscles (iliopsoas-hamstrings and soleus-tibialis anterior)
+	
+	# Muscle co-contraction, only mono-articular muscles are used
+	MuscleReflex { target = iliopsoas  source = hamstrings   KF = $KF delay = $DL }
+	MuscleReflex { target = hamstrings  source = iliopsoas   KF = $KF delay = $DL }	
+	MuscleReflex { target = iliopsoas  source = glut_max   KF = $KF delay = $DL }
+	MuscleReflex { target = glut_max   source = iliopsoas  KF = $KF delay = $DL }
+	MuscleReflex { target = bifemsh    source = vasti      KF = $KF delay = $DL }
+	MuscleReflex { target = vasti      source = bifemsh    KF = $KF delay = $DL }
+	MuscleReflex { target = soleus     source = tib_ant    KF = $KF delay = $DL }
+	MuscleReflex { target = tib_ant    source = soleus     KF = $KF delay = $DL }	
+	
+}

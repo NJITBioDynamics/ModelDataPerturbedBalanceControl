@@ -1,0 +1,24 @@
+# Some predefined variables we use later on
+#$L0 = ~0.5
+#$KL = ~1
+$KP = 0~0.1
+$KV = 0~0.1
+#$VDELAY = ~0.15<0.1,0.2>
+$VDELAY = 0.100	# this is where the feedback delay is set for each simulation
+$DIR = [ 1 0 0 ]
+
+ReflexController {
+	name = Com
+	symmetric = 1
+	
+	# Vestibular reflexes, the COM reflex delay based on McKay et al. 2021, "Abnormal center of mass feedback responses during balance:... "
+	ComPivotReflex { target = iliopsoas  KP = $KP KV = $KV delay = $VDELAY  dir = $DIR }
+	ComPivotReflex { target = rect_fem   KP = $KP KV = $KV delay = $VDELAY  dir = $DIR }
+	ComPivotReflex { target = vasti      KP = $KP KV = $KV delay = $VDELAY  dir = $DIR }
+	ComPivotReflex { target = tib_ant    KP = $KP KV = $KV delay = $VDELAY  dir = $DIR }
+	ComPivotReflex { target = glut_max   KP = $KP KV = $KV delay = $VDELAY  dir = $DIR }
+	ComPivotReflex { target = hamstrings KP = $KP KV = $KV delay = $VDELAY  dir = $DIR }
+	ComPivotReflex { target = bifemsh    KP = $KP KV = $KV delay = $VDELAY  dir = $DIR }
+	ComPivotReflex { target = gastroc    KP = $KP KV = $KV delay = $VDELAY  dir = $DIR }
+	ComPivotReflex { target = soleus     KP = $KP KV = $KV delay = $VDELAY  dir = $DIR }
+}

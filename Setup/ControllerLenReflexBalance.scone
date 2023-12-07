@@ -1,0 +1,39 @@
+# Some predefined variables we use later on
+#L0 is set to 0.2-1.1 based on Koelewijn and Ijspeert 2020, "Exploring the Contribution of Proprioceptive Reflexes to Balance Control in Perturbed Standing"
+$L0 = ~0.5<0.2,1.1> 
+#KL is set to -10-10 instead of -3-3 in Koelewijn and Ijspeert 2020, "Exploring the Contribution of Proprioceptive Reflexes to Balance Control in Perturbed Standing"
+$KL = ~1<-10,10>
+#$KP = 0~0.1
+#$KV = 0~0.1
+#$VDELAY = 0.1
+#$OFS = [ 0 0.5 0 ]
+#$DIR = [ 1 0 0 ]
+
+# Muscle length reflexes based on Koelwwijn et al. 2020, "Exploring the contribution of proprioceptive reflexes to balance control in perturbed standing"
+$iliopsoas_delay = 0.040 
+$glut_max_delay = 0.040 
+$rect_fem_delay = 0.082 
+$hamstrings_delay = 0.060 
+$bifemsh_delay = 0.060 
+$vasti_delay = 0.10 
+$gastroc_delay = 0.054 
+$soleus_delay = 0.044 
+$tib_ant_delay = 0.035		
+
+
+ReflexController {
+	name = MuscleLen
+	symmetric = 1
+	
+	# Muscle length reflexes based on Koelwwijn et al. 2020, "Exploring the contribution of proprioceptive reflexes to balance control in perturbed standing"
+	MuscleReflex { target = iliopsoas  L0 = $L0 KL = $KL delay = $iliopsoas_delay }
+	MuscleReflex { target = glut_max   L0 = $L0 KL = $KL delay = $glut_max_delay  }
+	MuscleReflex { target = rect_fem   L0 = $L0 KL = $KL delay = $rect_fem_delay  }
+	MuscleReflex { target = hamstrings L0 = $L0 KL = $KL delay = $hamstrings_delay  }
+	MuscleReflex { target = bifemsh    L0 = $L0 KL = $KL delay = $bifemsh_delay  }
+	MuscleReflex { target = vasti      L0 = $L0 KL = $KL delay = $vasti_delay  }
+	MuscleReflex { target = gastroc    L0 = $L0 KL = $KL delay = $gastroc_delay }
+	MuscleReflex { target = soleus     L0 = $L0 KL = $KL delay = $soleus_delay }
+	MuscleReflex { target = tib_ant    L0 = $L0 KL = $KL delay = $tib_ant_delay }
+	
+}

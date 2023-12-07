@@ -1,0 +1,35 @@
+# Measure for standing balance
+CompositeMeasure {
+	# Penalize falling
+	BalanceMeasure {
+		termination_height = 0.90
+		weight = 100
+	}
+	
+	# Minimize effort
+	EffortMeasure {
+		name = Effort
+		measure_type = SquaredMuscleActivation
+	}
+	
+	# Penalize locked knees
+	DofMeasure {
+		dof = knee_angle_r
+		position { min = -30 max = 0 abs_penalty = 10 }
+	}
+	
+	# Penalize pelvis tilting
+	DofMeasure {
+		dof = pelvis_tilt
+		position { min = -15 max = 15 abs_penalty = 10 }
+	}
+	
+	# Penalize pelvis movement such as tipping and moving
+	DofMeasure {
+		dof = pelvis_tx
+		#dofmeasure uses degree but this is a translation dof, so we need multiply by 57.296
+		position { min = -11.46 max = 11.46 abs_penalty = 10 }
+	}
+	
+	
+}
